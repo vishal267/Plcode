@@ -1,3 +1,12 @@
+#Calico CNI 
+resource "helm_release" "calico" {
+  name       = "calico"
+  namespace  = "kube-system"
+  repository = "https://docs.tigera.io/calico/charts"
+  chart      = "projectcalico/tigera-operator"
+  version    = "3.26.1"
+}
+
 #AWS-ebs-csi-driver
 resource "helm_release" "aws-ebs-csi-driver" {
   name       = "aws-ebs-csi-driver"
@@ -29,6 +38,6 @@ resource "helm_release" "autoscaler" {
   chart      = "cluster-autoscaler"
   version    = "9.24.0"
 values = [
-     "${file("../charts/cluster-autoscaler/values.yaml")}"
+     "${file("./charts/cluster-autoscaler/values.yaml")}"
    ]
 }
