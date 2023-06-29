@@ -55,3 +55,17 @@ module "ecr" {
   source = "./ecr"
 }
 
+#module to setup K8s componenss
+
+module "k8s" {
+  source = "./k8s-manifests"
+
+depends_on = [
+    module.webapp_cluster,
+    module.webapp_vpc,
+    module.eks_node_group,
+    module.ecr
+
+]
+}
+

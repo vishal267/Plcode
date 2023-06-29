@@ -5,15 +5,18 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: ecr_rep
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: {{ .Environment.Values.app_release_version }}
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+extraEnvSecret:
+  dbusername: app
+  dbpassword: redhat@987
 serviceAccount:
   # Specifies whether a service account should be created
   create: true

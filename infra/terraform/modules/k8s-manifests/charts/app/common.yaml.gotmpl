@@ -1,0 +1,1 @@
+app_release_version: {{ readFile "versions.yaml" | fromYaml | pluck "app_docker_image_tag"  | first | default "latest" | toYaml }}
