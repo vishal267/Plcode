@@ -36,5 +36,16 @@ pipeline {
                 }
             }
         }
+        stage('Deploy Helm Charts') {
+            steps {
+                script {
+                    sh 'curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash'
+                    sh 'helm repo add <repository-name> <repository-url>'
+                    sh 'sed -i "s|{{image}}|${IMAGE_TAG}" infra/terraform/modules/k8s-manifests/charts/app/versions.yaml
+                    sh 'helm upgrade --install infra/terraform/modules/k8s-manifests/charts/app -n app -f infra/terraform/modules/k8s-manifests/charts/app'
+                }
+            }
+        }
+        
     }
 }
