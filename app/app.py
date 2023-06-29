@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import os
 import psycopg2
 import uuid
 
@@ -20,6 +21,7 @@ def create_message():
         message_data = request.get_json()
                 
         # Create a cursor to execute SQL queries
+        get_db_connection()
         cursor = connection.cursor()
         
         # Insert the message into the database
