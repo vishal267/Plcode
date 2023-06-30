@@ -49,6 +49,7 @@ def create_message():
 @app.route('/get/messages/<account_id>')
 def get_messages(account_id):
     try:
+        get_db_connection()
         # Create a cursor to execute SQL queries
         cursor = connection.cursor()
         
