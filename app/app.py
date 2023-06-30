@@ -84,7 +84,7 @@ def get_messages(account_id):
 def search_messages():
     try:
         message_ids = request.args.get('message_id', '').split(',')
-
+        get_db_connection()
         # Create a cursor to execute SQL queries
         cursor = connection.cursor()
 
